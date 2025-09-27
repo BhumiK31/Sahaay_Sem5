@@ -38,19 +38,19 @@ const Hero = () => {
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-accent-mint rounded-full"></span>
                 <span className="text-muted-foreground">
-                  <span className="text-xl font-bold text-primary">2,000+</span> verified helpers
+                  <span className="text-xl font-bold text-primary">2,000+</span> trusted helpers
                 </span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-highlight-yellow rounded-full"></span>
                 <span className="text-muted-foreground">
-                  <span className="text-xl font-bold text-primary">10,000+</span> hours supported
+                  <span className="text-xl font-bold text-primary">10,000+</span> families helped
                 </span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-accent-coral rounded-full"></span>
                 <span className="text-muted-foreground">
-                  <span className="text-xl font-bold text-primary">24/7</span> Available
+                  <span className="text-xl font-bold text-primary">24/7</span> support available
                 </span>
               </div>
             </div>
