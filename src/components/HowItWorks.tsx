@@ -75,7 +75,7 @@ const HowItWorks = () => {
                       <step.icon className="w-5 h-5 text-primary" />
                       <h4 className="font-semibold text-foreground">{step.title}</h4>
                     </div>
-                    <p className="text-muted-foreground">{step.description}</p>
+                    <p className="text-muted-foreground text-sm">{step.description}</p>
                   </div>
                 </div>)}
             </div>
@@ -102,7 +102,7 @@ const HowItWorks = () => {
                       <step.icon className="w-5 h-5 text-accent-coral" />
                       <h4 className="font-semibold text-foreground">{step.title}</h4>
                     </div>
-                    <p className="text-muted-foreground">{step.description}</p>
+                    <p className="text-muted-foreground text-sm">{step.description}</p>
                   </div>
                 </div>)}
             </div>

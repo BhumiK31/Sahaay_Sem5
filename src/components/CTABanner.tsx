@@ -1,15 +1,14 @@
 import { Button } from '@/components/ui/button';
-
 const CTABanner = () => {
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
   };
-
-  return (
-    <section className="section-padding bg-gradient-to-r from-primary via-accent-coral to-accent-mint">
+  return <section className="section-padding from-primary via-accent-coral to-accent-mint bg-[Daily_credits_reset_at_midnight_UTC] bg-[#696969]">
       <div className="container-width">
         <div className="text-center space-y-8">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-poppins font-bold text-white mb-6">
@@ -20,16 +19,10 @@ const CTABanner = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Button
-              onClick={() => scrollToSection('#services')}
-              className="bg-white text-primary hover:bg-white/90 text-lg px-8 py-4 rounded-[var(--radius-lg)] font-medium transition-all duration-300 hover:scale-105 shadow-[var(--shadow-soft)]"
-            >
+            <Button onClick={() => scrollToSection('#services')} className="bg-white text-primary hover:bg-white/90 text-lg px-8 py-4 rounded-[var(--radius-lg)] font-medium transition-all duration-300 hover:scale-105 shadow-[var(--shadow-soft)]">
               Find Help
             </Button>
-            <Button
-              onClick={() => scrollToSection('#signup')}
-              className="bg-white/10 text-white border border-white/30 hover:bg-white/20 text-lg px-8 py-4 rounded-[var(--radius-lg)] font-medium transition-all duration-300 hover:scale-105"
-            >
+            <Button onClick={() => scrollToSection('#signup')} className="bg-white/10 text-white border border-white/30 hover:bg-white/20 text-lg px-8 py-4 rounded-[var(--radius-lg)] font-medium transition-all duration-300 hover:scale-105">
               Offer Help
             </Button>
           </div>
@@ -51,8 +44,6 @@ const CTABanner = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default CTABanner;
