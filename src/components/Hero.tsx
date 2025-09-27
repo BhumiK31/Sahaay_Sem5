@@ -15,9 +15,8 @@ const Hero = () => {
           {/* Content */}
           <div className="space-y-8">
             <div className="space-y-6">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-poppins font-bold text-foreground leading-tight">
-                Help when you need it.{' '}
-                <span className="text-primary">Bridging Needs with Deeds.</span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-poppins font-bold text-primary leading-tight">
+                Bridging Needs with Deeds.
               </h1>
               <p className="text-xl text-muted-foreground max-w-xl">
                 Sahaay connects families with verified local helpers for child care, 
