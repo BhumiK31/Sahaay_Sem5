@@ -81,13 +81,10 @@ const Services = () => {
                 <div className="flex flex-col h-full">
                   {/* Icon & Category */}
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 rounded-xl bg-[hsl(var(--service-category-bg))] border border-[hsl(var(--service-category))]/20">
+                    <div className="p-3 bg-[hsl(var(--service-category-bg))] border border-[hsl(var(--service-category))]/20 bg-[#ecf2fc] rounded-lg">
                       <service.lucideIcon className="w-6 h-6 text-[hsl(var(--service-category))]" />
                     </div>
-                    <Badge 
-                      variant="outline" 
-                      className="text-xs text-[hsl(var(--service-category))] bg-[hsl(var(--service-category-bg))] border-[hsl(var(--service-category))]/30 hover:bg-[hsl(var(--service-category-bg))]"
-                    >
+                    <Badge variant="outline" className="text-xs text-[hsl(var(--service-category))] bg-[hsl(var(--service-category-bg))] border-[hsl(var(--service-category))]/30 hover:bg-[hsl(var(--service-category-bg))]">
                       {service.category}
                     </Badge>
                   </div>
