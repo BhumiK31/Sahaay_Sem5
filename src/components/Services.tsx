@@ -7,7 +7,6 @@ const Services = () => {
   const [selectedService, setSelectedService] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const services = [{
-    icon: '👶',
     category: 'Child Care',
     title: 'Babysitting & After-School Help',
     description: 'Safe, nurturing care for your little ones when you need it most.',
@@ -16,7 +15,6 @@ const Services = () => {
     fullDescription: 'Professional child care services with verified caregivers who love working with children.',
     tasks: ['Babysitting for date nights', 'After-school pickup & care', 'Homework assistance', 'Meal preparation', 'Creative activities & games', 'Light housekeeping', 'Emergency backup care', 'Weekend childcare']
   }, {
-    icon: '👵',
     category: 'Senior Care',
     title: 'Companionship & Daily Support',
     description: 'Compassionate care and companionship for elderly family members.',
@@ -25,7 +23,6 @@ const Services = () => {
     fullDescription: 'Dedicated support for seniors, focusing on companionship, daily assistance, and maintaining independence.',
     tasks: ['Daily companionship', 'Medication reminders', 'Light meal preparation', 'Transportation to appointments', 'Help with daily activities', 'Social engagement', 'Safety monitoring', 'Family updates']
   }, {
-    icon: '🤝',
     category: 'Adult Support',
     title: 'Assistance for Differently-Abled Adults',
     description: 'Respectful, personalized support for adults with special needs.',
@@ -34,7 +31,6 @@ const Services = () => {
     fullDescription: 'Professional support services tailored to individual needs, promoting independence and dignity.',
     tasks: ['Personal care assistance', 'Daily living support', 'Community integration', 'Transportation services', 'Skill development support', 'Social activities', 'Respite care for families', 'Goal-oriented assistance']
   }, {
-    icon: '🐕',
     category: 'Pet Care',
     title: 'Walking, Feeding & Vet Visits',
     description: 'Loving care for your furry family members while you\'re away.',
@@ -43,7 +39,6 @@ const Services = () => {
     fullDescription: 'Comprehensive pet care services from animal lovers who treat your pets like family.',
     tasks: ['Daily dog walks', 'Pet feeding & care', 'Vet appointment transport', 'Pet sitting at home', 'Overnight pet care', 'Exercise & playtime', 'Basic grooming', 'Emergency pet care']
   }, {
-    icon: '📚',
     category: 'Tutoring',
     title: 'Academic Support & Skills',
     description: 'Expert tutoring in school subjects and life skills development.',
@@ -52,7 +47,6 @@ const Services = () => {
     fullDescription: 'Educational support from qualified tutors and skilled professionals for all ages and subjects.',
     tasks: ['Math & science tutoring', 'Language arts support', 'Exam preparation', 'Homework assistance', 'Computer skills training', 'Music lessons', 'Art & creative skills', 'Study skills development']
   }, {
-    icon: '🛍️',
     category: 'Errand Support',
     title: 'Groceries, Medicine & Quick Tasks',
     description: 'Reliable help with daily errands and essential tasks.',
@@ -66,7 +60,7 @@ const Services = () => {
       title: service.title,
       description: service.fullDescription,
       tasks: service.tasks,
-      icon: service.icon
+      lucideIcon: service.lucideIcon
     });
     setIsModalOpen(true);
   };
@@ -87,8 +81,13 @@ const Services = () => {
                 <div className="flex flex-col h-full">
                   {/* Icon & Category */}
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="text-4xl">{service.icon}</div>
-                    <Badge variant="secondary" className="text-xs">
+                    <div className="p-3 rounded-xl bg-[hsl(var(--service-category-bg))] border border-[hsl(var(--service-category))]/20">
+                      <service.lucideIcon className="w-6 h-6 text-[hsl(var(--service-category))]" />
+                    </div>
+                    <Badge 
+                      variant="outline" 
+                      className="text-xs text-[hsl(var(--service-category))] bg-[hsl(var(--service-category-bg))] border-[hsl(var(--service-category))]/30 hover:bg-[hsl(var(--service-category-bg))]"
+                    >
                       {service.category}
                     </Badge>
                   </div>

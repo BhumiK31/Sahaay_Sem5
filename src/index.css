@@ -21,6 +21,10 @@ All colors MUST be HSL for perfect theming.
     --accent-coral: 7 100% 69%;
     --accent-coral-foreground: 0 0% 100%;
     
+    --service-category: 7 100% 69%;
+    --service-category-foreground: 0 0% 100%;
+    --service-category-bg: 7 100% 95%;
+    
     --accent-mint: 166 54% 69%;
     --accent-mint-foreground: 220 48% 11%;
     

@@ -4,13 +4,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
-import { X } from 'lucide-react';
+import { X, LucideIcon } from 'lucide-react';
 
 interface Service {
   title: string;
   description: string;
   tasks: string[];
-  icon: string;
+  lucideIcon: LucideIcon;
 }
 
 interface ServiceModalProps {
@@ -70,7 +70,9 @@ const ServiceModal = ({ service, isOpen, onClose }: ServiceModalProps) => {
         <DialogHeader>
           <div className="flex items-center justify-between">
             <DialogTitle className="text-2xl font-poppins flex items-center gap-3">
-              <span className="text-3xl">{service.icon}</span>
+              <div className="p-3 rounded-xl bg-[hsl(var(--service-category-bg))] border border-[hsl(var(--service-category))]/20">
+                <service.lucideIcon className="w-6 h-6 text-[hsl(var(--service-category))]" />
+              </div>
               {service.title}
             </DialogTitle>
             <Button
