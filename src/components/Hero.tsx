@@ -34,18 +34,24 @@ const Hero = () => {
             </div>
 
             {/* Trust indicators */}
-            <div className="flex flex-wrap gap-6 text-sm text-muted-foreground">
+            <div className="flex flex-wrap gap-6 text-sm">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-accent-mint rounded-full"></span>
-                2,000+ verified helpers
+                <span className="text-muted-foreground">
+                  <span className="text-xl font-bold text-primary">2,000+</span> verified helpers
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-highlight-yellow rounded-full"></span>
-                10,000+ hours supported
+                <span className="text-muted-foreground">
+                  <span className="text-xl font-bold text-primary">10,000+</span> hours supported
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-accent-coral rounded-full"></span>
-                Available 24/7
+                <span className="text-muted-foreground">
+                  <span className="text-xl font-bold text-primary">24/7</span> Available
+                </span>
               </div>
             </div>
           </div>
