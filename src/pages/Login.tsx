@@ -5,36 +5,28 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Heart, Eye, EyeOff } from 'lucide-react';
-
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle login logic here
     console.log('Login attempt:', formData);
   };
-
-  return (
-    <div className="min-h-screen bg-background flex items-center justify-center section-padding">
+  return <div className="min-h-screen bg-background flex items-center justify-center section-padding">
       <div className="w-full max-w-md space-y-8">
         {/* Logo */}
         <div className="text-center">
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <Heart className="h-8 w-8 text-accent-coral" fill="currentColor" />
-            <span className="text-2xl font-poppins font-bold text-foreground">SAHAAY</span>
-          </div>
+          
         </div>
 
         <Card className="shadow-[var(--shadow-hover)]">
@@ -48,34 +40,14 @@ const Login = () => {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                />
+                <Input id="email" name="email" type="email" placeholder="Enter your email" value={formData.email} onChange={handleInputChange} required />
               </div>
               
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
                 <div className="relative">
-                  <Input
-                    id="password"
-                    name="password"
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder="Enter your password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                  >
+                  <Input id="password" name="password" type={showPassword ? 'text' : 'password'} placeholder="Enter your password" value={formData.password} onChange={handleInputChange} required />
+                  <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground">
                     {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                   </button>
                 </div>
@@ -106,18 +78,12 @@ const Login = () => {
             </div>
 
             <div className="text-center space-y-2">
-              <Link 
-                to="/forgot-password" 
-                className="text-sm text-primary hover:text-primary/80 transition-colors"
-              >
+              <Link to="/forgot-password" className="text-sm text-primary hover:text-primary/80 transition-colors">
                 Forgot Password?
               </Link>
               <p className="text-sm text-muted-foreground">
                 Don't have an account?{' '}
-                <Link 
-                  to="/signup" 
-                  className="text-primary hover:text-primary/80 transition-colors font-medium"
-                >
+                <Link to="/signup" className="text-primary hover:text-primary/80 transition-colors font-medium">
                   Create an Account
                 </Link>
               </p>
@@ -125,8 +91,6 @@ const Login = () => {
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Login;
