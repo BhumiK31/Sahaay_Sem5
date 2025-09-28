@@ -57,7 +57,7 @@ const HowItWorks = () => {
           {/* For Families */}
           <div className="space-y-8">
             <div className="text-center lg:text-left">
-              <h3 className="text-2xl font-poppins font-semibold text-primary mb-4">
+              <h3 className="text-2xl font-poppins font-semibold text-primary mb-4 text-center">
                 For Families
               </h3>
               <p className="text-muted-foreground">
@@ -72,8 +72,8 @@ const HowItWorks = () => {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <step.icon className="w-5 h-5 text-primary" />
-                      <h4 className="font-semibold text-foreground">{step.title}</h4>
+                      <step.icon className="w-5 h-5 text-primary bg-slate-50" />
+                      <h4 className="text-foreground font-bold">{step.title}</h4>
                     </div>
                     <p className="text-muted-foreground text-sm">{step.description}</p>
                   </div>
@@ -84,7 +84,7 @@ const HowItWorks = () => {
           {/* For Helpers */}
           <div className="space-y-8">
             <div className="text-center lg:text-left">
-              <h3 className="text-2xl font-poppins font-semibold text-accent-coral mb-4">
+              <h3 className="text-2xl font-poppins font-semibold text-accent-coral mb-4 text-center">
                 For Helpers
               </h3>
               <p className="text-muted-foreground">
@@ -100,7 +100,7 @@ const HowItWorks = () => {
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
                       <step.icon className="w-5 h-5 text-accent-coral" />
-                      <h4 className="font-semibold text-foreground">{step.title}</h4>
+                      <h4 className="text-foreground font-bold">{step.title}</h4>
                     </div>
                     <p className="text-muted-foreground text-sm">{step.description}</p>
                   </div>
