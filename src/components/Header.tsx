@@ -1,29 +1,37 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Heart } from 'lucide-react';
-
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const navLinks = [
-    { name: 'Home', href: '#hero' },
-    { name: 'How it works', href: '#how-it-works' },
-    { name: 'Services', href: '#services' },
-    { name: 'Trust & Safety', href: '#trust-safety' },
-    { name: 'FAQs', href: '#faqs' },
-    { name: 'Contact', href: '#contact' }
-  ];
-
+  const navLinks = [{
+    name: 'Home',
+    href: '#hero'
+  }, {
+    name: 'How it works',
+    href: '#how-it-works'
+  }, {
+    name: 'Services',
+    href: '#services'
+  }, {
+    name: 'Trust & Safety',
+    href: '#trust-safety'
+  }, {
+    name: 'FAQs',
+    href: '#faqs'
+  }, {
+    name: 'Contact',
+    href: '#contact'
+  }];
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
     setIsMenuOpen(false);
   };
-
-  return (
-    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+  return <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="container-width">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
@@ -34,76 +42,44 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <button
-                key={link.name}
-                onClick={() => scrollToSection(link.href)}
-                className="text-foreground hover:text-primary transition-colors duration-200 font-medium"
-              >
+            {navLinks.map(link => <button key={link.name} onClick={() => scrollToSection(link.href)} className="text-foreground hover:text-primary transition-colors duration-200 font-medium">
                 {link.name}
-              </button>
-            ))}
+              </button>)}
           </nav>
 
           {/* Desktop CTAs */}
           <div className="hidden lg:flex items-center space-x-4">
-            <Button
-              variant="outline"
-              onClick={() => window.location.href = '/login'}
-            >
+            <Button variant="outline" onClick={() => window.location.href = '/login'} className="rounded-lg text-right font-semibold text-[#4687e2] bg-slate-300 hover:bg-slate-200">
               Login
             </Button>
-            <Button
-              onClick={() => window.location.href = '/signup'}
-              className="btn-hero"
-            >
+            <Button onClick={() => window.location.href = '/signup'} className="btn-hero">
               Sign Up
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 text-foreground hover:text-primary transition-colors"
-          >
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="lg:hidden p-2 text-foreground hover:text-primary transition-colors">
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
         {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="lg:hidden bg-background border-t border-border">
+        {isMenuOpen && <div className="lg:hidden bg-background border-t border-border">
             <nav className="py-4 space-y-4">
-              {navLinks.map((link) => (
-                <button
-                  key={link.name}
-                  onClick={() => scrollToSection(link.href)}
-                  className="block w-full text-left px-4 py-2 text-foreground hover:text-primary transition-colors"
-                >
+              {navLinks.map(link => <button key={link.name} onClick={() => scrollToSection(link.href)} className="block w-full text-left px-4 py-2 text-foreground hover:text-primary transition-colors">
                   {link.name}
-                </button>
-              ))}
+                </button>)}
               <div className="px-4 pt-4 space-y-3">
-                <Button
-                  variant="outline"
-                  onClick={() => window.location.href = '/login'}
-                  className="w-full"
-                >
+                <Button variant="outline" onClick={() => window.location.href = '/login'} className="w-full">
                   Login
                 </Button>
-                <Button
-                  onClick={() => window.location.href = '/signup'}
-                  className="btn-hero w-full"
-                >
+                <Button onClick={() => window.location.href = '/signup'} className="btn-hero w-full">
                   Sign Up
                 </Button>
               </div>
             </nav>
-          </div>
-        )}
+          </div>}
       </div>
-    </header>
-  );
+    </header>;
 };
-
 export default Header;
