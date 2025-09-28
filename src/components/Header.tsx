@@ -48,16 +48,16 @@ const Header = () => {
           {/* Desktop CTAs */}
           <div className="hidden lg:flex items-center space-x-4">
             <Button
-              onClick={() => scrollToSection('#services')}
-              className="btn-hero"
+              variant="outline"
+              onClick={() => window.location.href = '/login'}
             >
-              Find Help
+              Login
             </Button>
             <Button
-              onClick={() => scrollToSection('#signup')}
-              className="btn-secondary"
+              onClick={() => window.location.href = '/signup'}
+              className="btn-hero"
             >
-              Offer Help
+              Sign Up
             </Button>
           </div>
 
@@ -85,16 +85,17 @@ const Header = () => {
               ))}
               <div className="px-4 pt-4 space-y-3">
                 <Button
-                  onClick={() => scrollToSection('#services')}
-                  className="btn-hero w-full"
+                  variant="outline"
+                  onClick={() => window.location.href = '/login'}
+                  className="w-full"
                 >
-                  Find Help
+                  Login
                 </Button>
                 <Button
-                  onClick={() => scrollToSection('#signup')}
-                  className="btn-secondary w-full"
+                  onClick={() => window.location.href = '/signup'}
+                  className="btn-hero w-full"
                 >
-                  Offer Help
+                  Sign Up
                 </Button>
               </div>
             </nav>

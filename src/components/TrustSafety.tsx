@@ -49,7 +49,10 @@ const TrustSafety = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {trustFeatures.map((feature, index) => (
-            <div key={index} className="text-center space-y-4 p-6">
+            <div 
+              key={index} 
+              className="trust-safety-card text-center space-y-4 p-6 bg-card rounded-[var(--radius-lg)] border border-border/50 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-300 hover:scale-105 hover:border-accent-mint/20"
+            >
               <div className="inline-flex items-center justify-center w-16 h-16 bg-accent-mint/10 rounded-full">
                 <feature.icon className="w-8 h-8 text-accent-mint" />
               </div>

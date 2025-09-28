@@ -57,7 +57,10 @@ const WhySahaay = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {usps.map((usp, index) => (
-            <div key={index} className="text-center space-y-4">
+            <div 
+              key={index} 
+              className="why-sahaay-card text-center space-y-4 p-6 bg-card rounded-[var(--radius-lg)] border border-border/50 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-300 hover:scale-105 hover:border-primary/20 hover:bg-card/80"
+            >
               <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full ${getColorClasses(usp.color)}`}>
                 <usp.icon className="w-8 h-8" />
               </div>
