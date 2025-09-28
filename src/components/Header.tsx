@@ -49,10 +49,10 @@ const Header = () => {
 
           {/* Desktop CTAs */}
           <div className="hidden lg:flex items-center space-x-4">
-            <Button variant="outline" onClick={() => window.location.href = '/login'} className="rounded-lg text-right font-semibold text-[#4687e2] bg-slate-300 hover:bg-slate-200">
+            <Button variant="outline" onClick={() => window.location.href = '/login'} className="text-[#4687e2] text-center font-semibold rounded-xl bg-slate-300 hover:bg-slate-200">
               Login
             </Button>
-            <Button onClick={() => window.location.href = '/signup'} className="btn-hero">
+            <Button onClick={() => window.location.href = '/signup'} className="btn-hero rounded-xl">
               Sign Up
             </Button>
           </div>
