@@ -8,7 +8,7 @@ const CTABanner = () => {
       });
     }
   };
-  return <section className="section-padding from-primary via-accent-coral to-accent-mint bg-[Daily_credits_reset_at_midnight_UTC] bg-[#696969]">
+  return <section className="section-padding from-primary via-accent-coral to-accent-mint bg-[Daily_credits_reset_at_midnight_UTC] bg-[#4687e2]">
       <div className="container-width">
         <div className="text-center space-y-8">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-poppins font-bold text-white mb-6">
