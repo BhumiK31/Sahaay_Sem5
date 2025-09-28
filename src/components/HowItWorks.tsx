@@ -60,7 +60,7 @@ const HowItWorks = () => {
               <h3 className="text-2xl font-poppins font-semibold text-primary mb-4 text-center">
                 For Families
               </h3>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground text-center">
                 Get the help you need in just a few simple steps
               </p>
             </div>
@@ -73,7 +73,7 @@ const HowItWorks = () => {
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
                       <step.icon className="w-5 h-5 text-primary bg-slate-50" />
-                      <h4 className="text-foreground font-bold">{step.title}</h4>
+                      <h4 className="text-foreground font-bold text-center">{step.title}</h4>
                     </div>
                     <p className="text-muted-foreground text-sm">{step.description}</p>
                   </div>
@@ -87,7 +87,7 @@ const HowItWorks = () => {
               <h3 className="text-2xl font-poppins font-semibold text-accent-coral mb-4 text-center">
                 For Helpers
               </h3>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground text-center">
                 Start earning while helping your community
               </p>
             </div>
@@ -100,7 +100,7 @@ const HowItWorks = () => {
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
                       <step.icon className="w-5 h-5 text-accent-coral" />
-                      <h4 className="text-foreground font-bold">{step.title}</h4>
+                      <h4 className="text-foreground font-bold text-center">{step.title}</h4>
                     </div>
                     <p className="text-muted-foreground text-sm">{step.description}</p>
                   </div>
