@@ -28,7 +28,7 @@ const Hero = () => {
               <Button onClick={() => scrollToSection('#services')} className="btn-hero text-lg px-8 py-4">
                 Find Help
               </Button>
-              <Button onClick={() => scrollToSection('#signup')} className="btn-secondary text-lg px-8 py-4">
+              <Button onClick={() => scrollToSection('#services')} className="btn-secondary text-lg px-8 py-4">
                 Offer Help
               </Button>
             </div>

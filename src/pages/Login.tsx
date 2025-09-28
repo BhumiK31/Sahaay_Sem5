@@ -4,7 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Heart, Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
+import sahaayLogo from '@/assets/sahaay-logo.png';
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -26,14 +27,16 @@ const Login = () => {
       <div className="w-full max-w-md space-y-8">
         {/* Logo */}
         <div className="text-center">
-          
+          <div className="flex items-center justify-center mb-4">
+            <img src={sahaayLogo} alt="SAHAAY" className="h-10 w-auto" />
+          </div>
         </div>
 
         <Card className="shadow-[var(--shadow-hover)]">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl font-poppins">Welcome Back to Sahaay</CardTitle>
+            <CardTitle className="text-2xl font-poppins">Welcome Back to Sahaay 💛</CardTitle>
             <CardDescription>
-              Sign in to your account to continue
+              Your trusted space for care and support.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">

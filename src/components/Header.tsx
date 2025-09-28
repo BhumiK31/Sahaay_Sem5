@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Heart } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import sahaayLogo from '@/assets/sahaay-logo.png';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navLinks = [{
@@ -35,9 +36,8 @@ const Header = () => {
       <div className="container-width">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <Heart className="h-8 w-8 text-accent-coral" fill="currentColor" />
-            <span className="text-2xl font-poppins font-bold text-foreground">SAHAAY</span>
+          <div className="flex items-center">
+            <img src={sahaayLogo} alt="SAHAAY" className="h-10 w-auto" />
           </div>
 
           {/* Desktop Navigation */}

@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { X, LucideIcon } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface Service {
   title: string;
@@ -20,7 +21,16 @@ interface ServiceModalProps {
 }
 
 const ServiceModal = ({ service, isOpen, onClose }: ServiceModalProps) => {
+  const navigate = useNavigate();
   const [modalView, setModalView] = useState<'details' | 'need' | 'work' | 'success'>('details');
+
+  const handleINeedCare = () => {
+    navigate('/login?role=family');
+  };
+
+  const handleIWantToWork = () => {
+    navigate('/signup?role=student');
+  };
   const [formData, setFormData] = useState({
     location: '',
     datetime: '',
@@ -104,13 +114,13 @@ const ServiceModal = ({ service, isOpen, onClose }: ServiceModalProps) => {
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button
-                onClick={() => setModalView('need')}
+                onClick={handleINeedCare}
                 className="btn-hero flex-1"
               >
                 I need care
               </Button>
               <Button
-                onClick={() => setModalView('work')}
+                onClick={handleIWantToWork}
                 className="btn-coral flex-1"
               >
                 I want to work

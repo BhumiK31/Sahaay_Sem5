@@ -1,15 +1,17 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Heart, Eye, EyeOff, Users, HelpingHand } from 'lucide-react';
+import { Eye, EyeOff, Users, HelpingHand } from 'lucide-react';
+import sahaayLogo from '@/assets/sahaay-logo.png';
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [userRole, setUserRole] = useState<'helper' | 'seeker'>('seeker');
+  const [userRole, setUserRole] = useState<'family' | 'student'>('family');
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -28,6 +30,8 @@ const SignUp = () => {
     e.preventDefault();
     // Handle signup logic here
     console.log('Signup attempt:', { ...formData, role: userRole });
+    // Redirect to email verification
+    navigate('/email-verification');
   };
 
   return (
@@ -35,15 +39,14 @@ const SignUp = () => {
       <div className="w-full max-w-md space-y-8">
         {/* Logo */}
         <div className="text-center">
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <Heart className="h-8 w-8 text-accent-coral" fill="currentColor" />
-            <span className="text-2xl font-poppins font-bold text-foreground">SAHAAY</span>
+          <div className="flex items-center justify-center mb-4">
+            <img src={sahaayLogo} alt="SAHAAY" className="h-10 w-auto" />
           </div>
         </div>
 
         <Card className="shadow-[var(--shadow-hover)]">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl font-poppins">Join the Sahaay Community</CardTitle>
+            <CardTitle className="text-2xl font-poppins">Join the Sahaay Community 🤝</CardTitle>
             <CardDescription>
               Create your account to get started
             </CardDescription>
@@ -55,29 +58,29 @@ const SignUp = () => {
               <div className="grid grid-cols-2 gap-3">
                 <button
                   type="button"
-                  onClick={() => setUserRole('seeker')}
+                  onClick={() => setUserRole('family')}
                   className={`p-4 rounded-lg border-2 transition-all duration-200 ${
-                    userRole === 'seeker'
+                    userRole === 'family'
                       ? 'border-primary bg-primary/5 text-primary'
                       : 'border-border hover:border-primary/50'
                   }`}
                 >
                   <Users className="w-6 h-6 mx-auto mb-2" />
                   <div className="text-sm font-medium">I need help</div>
-                  <div className="text-xs text-muted-foreground">Find support & care</div>
+                  <div className="text-xs text-muted-foreground">Find support & care (Family)</div>
                 </button>
                 <button
                   type="button"
-                  onClick={() => setUserRole('helper')}
+                  onClick={() => setUserRole('student')}
                   className={`p-4 rounded-lg border-2 transition-all duration-200 ${
-                    userRole === 'helper'
+                    userRole === 'student'
                       ? 'border-primary bg-primary/5 text-primary'
                       : 'border-border hover:border-primary/50'
                   }`}
                 >
                   <HelpingHand className="w-6 h-6 mx-auto mb-2" />
                   <div className="text-sm font-medium">I want to help</div>
-                  <div className="text-xs text-muted-foreground">Offer support & care</div>
+                  <div className="text-xs text-muted-foreground">Offer support & care (Student)</div>
                 </button>
               </div>
             </div>
