@@ -11,6 +11,9 @@ const reviewRoutes = require('./routes/reviews');
 
 const app = express();
 app.use(express.json());
+const cors = require('cors');
+app.use(cors());
+
 
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB connected'))

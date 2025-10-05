@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,6 +11,9 @@ const EmailVerification = () => {
   const [isResending, setIsResending] = useState(false);
   const [countdown, setCountdown] = useState(30);
   const navigate = useNavigate();
+  const location = useLocation();
+  // Get email passed from SignUp form
+  const email = location.state?.email || '';
 
   useEffect(() => {
     if (countdown > 0) {
@@ -19,33 +22,62 @@ const EmailVerification = () => {
     }
   }, [countdown]);
 
-  const handleVerify = (e: React.FormEvent) => {
+  const handleVerify = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!email) {
+      alert("No email found. Please sign up again.");
+      navigate("/signup");
+      return;
+    }
     if (otp.length === 6) {
-      // Handle OTP verification
-      console.log('OTP verification:', otp);
-      navigate('/profile-completion');
+      try {
+        const response = await fetch('http://localhost:5000/api/users/verify-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, code: otp }),
+        });
+        const result = await response.json();
+        if (response.ok) {
+          alert('Email verified successfully!');
+          navigate('/profile-completion');
+        } else {
+          alert(result.message || 'Verification failed');
+        }
+      } catch (error) {
+        alert('An error occurred during verification. Please try again.');
+      }
     }
   };
 
   const handleResend = async () => {
     setIsResending(true);
-    // Handle resend logic
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      const response = await fetch('http://localhost:5000/api/users/resend-verification', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      if (response.ok) {
+        alert('Verification code resent to your email');
+        setCountdown(30);
+      } else {
+        const result = await response.json();
+        alert(result.message || 'Failed to resend code');
+      }
+    } catch (error) {
+      alert('Error resending code. Please try again.');
+    }
     setIsResending(false);
-    setCountdown(30);
   };
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center section-padding">
       <div className="w-full max-w-md space-y-8">
-        {/* Logo */}
         <div className="text-center">
           <div className="flex items-center justify-center mb-4">
             <img src={sahaayLogo} alt="SAHAAY" className="h-10 w-auto" />
           </div>
         </div>
-
         <Card className="shadow-[var(--shadow-hover)]">
           <CardHeader className="text-center">
             <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -76,7 +108,6 @@ const EmailVerification = () => {
                   </InputOTP>
                 </div>
               </div>
-
               <Button 
                 type="submit" 
                 className="w-full btn-hero"
@@ -85,7 +116,6 @@ const EmailVerification = () => {
                 Verify & Continue
               </Button>
             </form>
-
             <div className="text-center space-y-3">
               <p className="text-sm text-muted-foreground">
                 Didn't receive the code?
@@ -104,7 +134,6 @@ const EmailVerification = () => {
                 }
               </Button>
             </div>
-
             <div className="text-center">
               <Link 
                 to="/signup" 

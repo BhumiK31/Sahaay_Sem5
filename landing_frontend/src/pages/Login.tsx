@@ -1,29 +1,59 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Eye, EyeOff } from 'lucide-react';
 import sahaayLogo from '@/assets/sahaay-logo.png';
+
 const Login = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+  const [loading, setLoading] = useState(false);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
-  const handleSubmit = (e: React.FormEvent) => {
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log('Login attempt:', formData);
+    setLoading(true);
+    try {
+      const response = await fetch('http://localhost:5000/api/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        // Save JWT and user info in localStorage
+        localStorage.setItem('token', result.token);
+        localStorage.setItem('user', JSON.stringify(result.user));
+        // Redirect after successful login
+        navigate('/dashboard'); // Change path as needed
+      } else {
+        alert(`Login failed: ${result.message || 'Unknown error'}`);
+      }
+    } catch (error) {
+      alert('An error occurred during login. Please try again.');
+    }
+    setLoading(false);
   };
-  return <div className="min-h-screen bg-background flex items-center justify-center section-padding">
+
+  return (
+    <div className="min-h-screen bg-background flex items-center justify-center section-padding">
       <div className="w-full max-w-md space-y-8">
         {/* Logo */}
         <div className="text-center">
@@ -45,7 +75,6 @@ const Login = () => {
                 <Label htmlFor="email">Email</Label>
                 <Input id="email" name="email" type="email" placeholder="Enter your email" value={formData.email} onChange={handleInputChange} required />
               </div>
-              
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
                 <div className="relative">
@@ -55,9 +84,8 @@ const Login = () => {
                   </button>
                 </div>
               </div>
-
-              <Button type="submit" className="w-full btn-hero">
-                Login
+              <Button type="submit" className="w-full btn-hero" disabled={loading}>
+                {loading ? 'Logging in...' : 'Login'}
               </Button>
             </form>
 
@@ -70,11 +98,9 @@ const Login = () => {
                   <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
                 </div>
               </div>
-
               <Button variant="outline" className="w-full">
                 Continue with Google
               </Button>
-              
               <Button variant="outline" className="w-full">
                 Continue with Apple
               </Button>
@@ -94,6 +120,8 @@ const Login = () => {
           </CardContent>
         </Card>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default Login;

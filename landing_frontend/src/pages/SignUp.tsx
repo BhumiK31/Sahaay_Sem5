@@ -13,7 +13,7 @@ const SignUp = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [userRole, setUserRole] = useState<'family' | 'student'>('family');
   const [formData, setFormData] = useState({
-    fullName: '',
+    name: '',
     email: '',
     password: '',
     confirmPassword: ''
@@ -26,13 +26,31 @@ const SignUp = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle signup logic here
-    console.log('Signup attempt:', { ...formData, role: userRole });
-    // Redirect to email verification
-    //navigate('/email-verification');
-    window.location.href = 'http://localhost:5173';
+    if (formData.password !== formData.confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
+    try {
+      const response = await fetch('http://localhost:5000/api/users/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, role: userRole }),
+      });
+      const result = await response.json();
+      if (response.ok) {
+        console.log('Signup successful:', result);
+        // Redirect to email verification and pass the email via state
+        navigate('/email-verification', { state: { email: formData.email } }); 
+      } else {
+        console.error('Signup failed:', result.message);
+        alert(`Signup failed: ${result.message || 'Unknown error'}`);
+      }
+    } catch (error) {
+      console.error('Signup error:', error);
+      alert('An error occurred during signup. Please try again.');
+    }
   };
 
   return (
@@ -53,6 +71,7 @@ const SignUp = () => {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
+
             {/* Role Selection */}
             <div className="space-y-3">
               <Label className="text-base font-medium">I am here to:</Label>
@@ -88,13 +107,13 @@ const SignUp = () => {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="fullName">Full Name</Label>
+                <Label htmlFor="name">Full Name</Label>
                 <Input
-                  id="fullName"
-                  name="fullName"
+                  id="name"
+                  name="name"
                   type="text"
                   placeholder="Enter your full name"
-                  value={formData.fullName}
+                  value={formData.name}
                   onChange={handleInputChange}
                   required
                 />
@@ -112,7 +131,7 @@ const SignUp = () => {
                   required
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
                 <div className="relative">
@@ -175,7 +194,7 @@ const SignUp = () => {
               <Button variant="outline" className="w-full">
                 Continue with Google
               </Button>
-              
+
               <Button variant="outline" className="w-full">
                 Continue with Apple
               </Button>
@@ -192,6 +211,7 @@ const SignUp = () => {
                 </Link>
               </p>
             </div>
+
           </CardContent>
         </Card>
       </div>

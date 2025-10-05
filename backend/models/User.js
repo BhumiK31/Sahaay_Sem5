@@ -4,11 +4,12 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  role: { type: String, enum: ['family', 'caregiver', 'admin'], required: true },
+  role: { type: String, enum: ['family', 'caregiver', 'admin', 'student'], required: true },
   phone: String,
   location: String,
   profileImage: String,
   verified: { type: Boolean, default: false },
+  verificationCode: String,  // Added for email verification
   profileCompletion: { type: Number, default: 0 },
   rating: { type: Number, default: 0 },
   skills: [String],
