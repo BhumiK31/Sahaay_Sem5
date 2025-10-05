@@ -22,6 +22,7 @@ const Login = () => {
     e.preventDefault();
     // Handle login logic here
     console.log('Login attempt:', formData);
+    window.location.href = 'http://localhost:5173';
   };
   return <div className="min-h-screen bg-background flex items-center justify-center section-padding">
       <div className="w-full max-w-md space-y-8">
@@ -96,4 +97,5 @@ const Login = () => {
       </div>
     </div>;
 };
+
 export default Login;
