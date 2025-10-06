@@ -5,26 +5,17 @@ import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
-
 const PaymentMethod = () => {
   const navigate = useNavigate();
   const [selectedMethod, setSelectedMethod] = useState<string>("google-pay");
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-6 max-w-2xl">
         {/* Header */}
         <div className="mb-6 flex items-center justify-between">
-          <button
-            onClick={() => navigate(-1)}
-            className="flex items-center gap-2 text-foreground hover:text-primary transition-colors"
-          >
+          <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
             <ArrowLeft className="h-5 w-5" />
           </button>
-          <button
-            onClick={() => navigate(-1)}
-            className="text-primary font-medium hover:text-primary/80 transition-colors"
-          >
+          <button onClick={() => navigate(-1)} className="text-primary font-medium hover:text-primary/80 transition-colors">
             CANCEL
           </button>
         </div>
@@ -91,15 +82,13 @@ const PaymentMethod = () => {
                   <Label htmlFor="netbanking" className="text-base font-normal cursor-pointer">
                     Net Banking
                   </Label>
-                  {selectedMethod === "netbanking" && (
-                    <select className="w-full mt-2 p-2 border border-border rounded-md bg-card text-foreground">
+                  {selectedMethod === "netbanking" && <select className="w-full mt-2 p-2 border border-border rounded-md bg-card text-foreground">
                       <option>Choose an Option</option>
                       <option>State Bank of India</option>
                       <option>HDFC Bank</option>
                       <option>ICICI Bank</option>
                       <option>Axis Bank</option>
-                    </select>
-                  )}
+                    </select>}
                 </div>
               </div>
             </RadioGroup>
@@ -108,15 +97,10 @@ const PaymentMethod = () => {
         </div>
 
         {/* Continue Button */}
-        <Button
-          className="w-full mt-8 h-12 text-base font-semibold bg-accent hover:bg-accent/90 text-accent-foreground"
-          onClick={() => navigate("/")}
-        >
+        <Button onClick={() => navigate("/")} className="w-full mt-8 h-12 text-base font-semibold text-accent-foreground bg-[#4a96e3]">
           Continue
         </Button>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default PaymentMethod;
