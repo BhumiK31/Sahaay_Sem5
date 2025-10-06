@@ -2,10 +2,8 @@ import { Phone, MessageSquare, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-
 export const CaregiverDetails = () => {
-  return (
-    <Card className="p-6">
+  return <Card className="p-6">
       <div className="flex items-start gap-2 mb-4">
         <div className="flex items-center gap-2 text-foreground">
           <div className="p-2 rounded-full bg-primary/10">
@@ -37,9 +35,7 @@ export const CaregiverDetails = () => {
               <span className="font-medium text-foreground">4.9</span>
               <span className="text-sm text-muted-foreground">(127 reviews)</span>
             </div>
-            <Badge variant="destructive" className="text-xs">
-              Verified
-            </Badge>
+            
           </div>
 
           <div className="flex gap-3">
@@ -54,6 +50,5 @@ export const CaregiverDetails = () => {
           </div>
         </div>
       </div>
-    </Card>
-  );
+    </Card>;
 };
