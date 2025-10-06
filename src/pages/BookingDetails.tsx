@@ -22,7 +22,7 @@ const BookingDetails = () => {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold text-foreground mb-1">Booking Details</h1>
-              <p className="text-muted-foreground">Booking ID: #1</p>
+              
             </div>
             <Badge className="bg-[hsl(var(--success))] text-white border-0 px-4 py-2 text-sm">Active</Badge>
           </div>
