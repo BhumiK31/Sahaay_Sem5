@@ -2,6 +2,7 @@ import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { CaregiverDetails } from "@/components/booking/CaregiverDetails";
+import { UploadedDocuments } from "@/components/booking/UploadedDocuments";
 import { ServiceInformation } from "@/components/booking/ServiceInformation";
 import { ContactDetails } from "@/components/booking/ContactDetails";
 import { PaymentSummary } from "@/components/booking/PaymentSummary";
@@ -40,6 +41,7 @@ const BookingDetails = () => {
           {/* Left Column */}
           <div className="lg:col-span-2 space-y-6">
             <CaregiverDetails />
+            <UploadedDocuments />
             <ServiceInformation />
             <ContactDetails />
           </div>
