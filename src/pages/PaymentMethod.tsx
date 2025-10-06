@@ -1,16 +1,14 @@
 import { useState } from "react";
-import { ArrowLeft, ChevronDown, Plus } from "lucide-react";
+import { ArrowLeft, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 const PaymentMethod = () => {
   const navigate = useNavigate();
   const [selectedMethod, setSelectedMethod] = useState<string>("google-pay");
-  const [promoOpen, setPromoOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background">
@@ -107,25 +105,6 @@ const PaymentMethod = () => {
             </RadioGroup>
           </Card>
 
-          {/* Gift Card or Promo Code */}
-          <Collapsible open={promoOpen} onOpenChange={setPromoOpen}>
-            <Card className="border-border">
-              <CollapsibleTrigger className="w-full p-6 flex items-center justify-between hover:bg-muted/50 transition-colors">
-                <span className="text-primary font-medium">Add Gift Card or Promo Code</span>
-                <ChevronDown className={`h-5 w-5 text-primary transition-transform ${promoOpen ? "rotate-180" : ""}`} />
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <div className="px-6 pb-6 space-y-3">
-                  <input
-                    type="text"
-                    placeholder="Enter code"
-                    className="w-full p-3 border border-border rounded-md bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                  />
-                  <Button className="w-full">Apply Code</Button>
-                </div>
-              </CollapsibleContent>
-            </Card>
-          </Collapsible>
         </div>
 
         {/* Continue Button */}
