@@ -7,12 +7,13 @@ interface Document {
   name: string;
   type: "pdf" | "image";
   verified: boolean;
+  url: string;
 }
 
 const documents: Document[] = [
-  { id: "1", name: "ID Proof.pdf", type: "pdf", verified: true },
-  { id: "2", name: "Certificate.jpg", type: "image", verified: true },
-  { id: "3", name: "Medical Certificate.pdf", type: "pdf", verified: true },
+  { id: "1", name: "ID Proof.pdf", type: "pdf", verified: true, url: "/documents/id-proof.pdf" },
+  { id: "2", name: "Certificate.jpg", type: "image", verified: true, url: "/documents/certificate.jpg" },
+  { id: "3", name: "Medical Certificate.pdf", type: "pdf", verified: true, url: "/documents/medical-cert.pdf" },
 ];
 
 export const UploadedDocuments = () => {
@@ -30,9 +31,12 @@ export const UploadedDocuments = () => {
       {documents.length > 0 ? (
         <div className="space-y-3">
           {documents.map((doc) => (
-            <div
+            <a
               key={doc.id}
-              className="flex items-center gap-3 p-3 rounded-lg border border-border hover:bg-muted/50 transition-colors"
+              href={doc.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-3 rounded-lg border border-border hover:bg-muted/50 transition-colors cursor-pointer group"
             >
               <div className="p-2 rounded-lg bg-muted">
                 {doc.type === "pdf" ? (
@@ -43,7 +47,7 @@ export const UploadedDocuments = () => {
               </div>
               
               <div className="flex-1">
-                <p className="text-sm font-medium text-foreground">{doc.name}</p>
+                <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">{doc.name}</p>
               </div>
 
               {doc.verified && (
@@ -52,7 +56,7 @@ export const UploadedDocuments = () => {
                   Verified
                 </Badge>
               )}
-            </div>
+            </a>
           ))}
         </div>
       ) : (
