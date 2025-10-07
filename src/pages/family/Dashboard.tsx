@@ -1,12 +1,18 @@
 import { useState } from "react";
-import { Eye, FileText, Star, Calendar, CheckCircle2, Download } from "lucide-react";
+import { Eye, FileText, Star, Calendar, CheckCircle2, Download, X, Search, MapPin, Filter } from "lucide-react";
 import StatCard from "@/components/caregiver/StatCard";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
 
 const FamilyDashboard = () => {
   const [isHiring, setIsHiring] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [serviceFilter, setServiceFilter] = useState("all");
+  const [locationFilter, setLocationFilter] = useState("all");
   
   const weeklyData = [
     { day: "Mon", hours: 6 },
@@ -26,11 +32,31 @@ const FamilyDashboard = () => {
     { name: "Meena Patel", rating: 4.7, experience: "4 years", status: "Hired" },
   ];
   
-  const documents = [
+  const [documents, setDocuments] = useState([
     { name: "Care Requirements.pdf", verified: true },
     { name: "Medical History.pdf", verified: true },
     { name: "House Guidelines.pdf", verified: true },
+  ]);
+
+  const recentCaregivers = [
+    { id: 1, name: "Ananya Sharma", photo: "AS", rating: 4.9, experience: "8 years", skills: ["Elderly Care", "Mobility Assistance"], location: "Mumbai, Maharashtra", rate: "₹15,000/month", availability: "Available Now" },
+    { id: 2, name: "Rajesh Kumar", photo: "RK", rating: 4.8, experience: "6 years", skills: ["Post-Surgery Care", "Medical Support"], location: "Bangalore, Karnataka", rate: "₹18,000/month", availability: "Available Now" },
+    { id: 3, name: "Meera Patel", photo: "MP", rating: 4.7, experience: "5 years", skills: ["Dementia Care", "Memory Support"], location: "Delhi NCR", rate: "₹16,500/month", availability: "Busy till Oct 15" },
   ];
+
+  const handleDownloadDocument = (docName: string) => {
+    console.log("Downloading:", docName);
+  };
+
+  const handleRemoveDocument = (docName: string) => {
+    setDocuments(documents.filter(doc => doc.name !== docName));
+  };
+
+  const filteredCaregivers = recentCaregivers.filter(caregiver => {
+    const matchesSearch = caregiver.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                         caregiver.location.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesSearch;
+  });
   
   return (
     <div className="min-h-screen bg-background">
@@ -197,18 +223,125 @@ const FamilyDashboard = () => {
               <h3 className="font-bold text-foreground mb-4">Uploaded Documents</h3>
               <div className="space-y-3">
                 {documents.map((doc, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors cursor-pointer">
+                  <div key={index} className="flex items-center justify-between p-3 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors group">
                     <div className="flex items-center gap-2 flex-1 min-w-0">
-                      <div className="p-1.5 bg-primary/10 rounded">
+                      <button 
+                        onClick={() => handleDownloadDocument(doc.name)}
+                        className="p-1.5 bg-primary/10 rounded hover:bg-primary/20 transition-colors"
+                        aria-label="Download document"
+                      >
                         <Download className="w-4 h-4 text-primary" />
-                      </div>
+                      </button>
                       <span className="text-sm font-medium text-foreground truncate">{doc.name}</span>
                     </div>
-                    {doc.verified && <CheckCircle2 className="w-4 h-4 text-success flex-shrink-0 ml-2" />}
+                    <div className="flex items-center gap-2 flex-shrink-0 ml-2">
+                      {doc.verified && <CheckCircle2 className="w-4 h-4 text-success" />}
+                      <button
+                        onClick={() => handleRemoveDocument(doc.name)}
+                        className="p-1 rounded hover:bg-coral/10 transition-colors opacity-0 group-hover:opacity-100"
+                        aria-label="Remove document"
+                      >
+                        <X className="w-4 h-4 text-coral" />
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Recent Caregivers Section */}
+        <div className="bg-card rounded-xl p-6 card-shadow">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-bold text-foreground">Recent Caregivers Applied</h2>
+            <Button variant="outline" size="sm">View All Caregivers</Button>
+          </div>
+
+          {/* Search & Filters */}
+          <div className="flex flex-col sm:flex-row gap-3 mb-6">
+            <div className="flex-1 relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                placeholder="Search for caregivers..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-9"
+              />
+            </div>
+            <Select value={serviceFilter} onValueChange={setServiceFilter}>
+              <SelectTrigger className="w-full sm:w-[180px]">
+                <Filter className="w-4 h-4 mr-2" />
+                <SelectValue placeholder="Service" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Services</SelectItem>
+                <SelectItem value="elderly">Elderly Care</SelectItem>
+                <SelectItem value="medical">Medical Support</SelectItem>
+                <SelectItem value="dementia">Dementia Care</SelectItem>
+              </SelectContent>
+            </Select>
+            <Select value={locationFilter} onValueChange={setLocationFilter}>
+              <SelectTrigger className="w-full sm:w-[180px]">
+                <MapPin className="w-4 h-4 mr-2" />
+                <SelectValue placeholder="Location" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Locations</SelectItem>
+                <SelectItem value="mumbai">Mumbai</SelectItem>
+                <SelectItem value="bangalore">Bangalore</SelectItem>
+                <SelectItem value="delhi">Delhi NCR</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Caregiver Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {filteredCaregivers.map((caregiver) => (
+              <div key={caregiver.id} className="p-4 bg-secondary rounded-lg hover:bg-secondary/80 transition-all hover:shadow-md">
+                <div className="flex items-start gap-3 mb-3">
+                  <Avatar className="w-12 h-12">
+                    <AvatarFallback className="bg-primary text-primary-foreground">{caregiver.photo}</AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-bold text-foreground truncate">{caregiver.name}</h3>
+                    <div className="flex items-center gap-1 text-sm">
+                      <Star className="w-3.5 h-3.5 text-primary fill-primary" />
+                      <span className="font-medium">{caregiver.rating}</span>
+                      <span className="text-muted-foreground">• {caregiver.experience}</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="flex flex-wrap gap-1.5 mb-3">
+                  {caregiver.skills.map((skill, idx) => (
+                    <Badge key={idx} variant="secondary" className="text-xs">{skill}</Badge>
+                  ))}
+                </div>
+
+                <div className="space-y-2 text-sm text-muted-foreground mb-3">
+                  <div className="flex items-center gap-1">
+                    <MapPin className="w-3.5 h-3.5" />
+                    <span className="truncate">{caregiver.location}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-primary">{caregiver.rate}</span>
+                    <span className={`text-xs px-2 py-0.5 rounded-full ${
+                      caregiver.availability === "Available Now" 
+                        ? "bg-success/10 text-success" 
+                        : "bg-coral/10 text-coral"
+                    }`}>
+                      {caregiver.availability}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex gap-2">
+                  <Button variant="outline" size="sm" className="flex-1">View Profile</Button>
+                  <Button size="sm" className="flex-1">Book Now</Button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
