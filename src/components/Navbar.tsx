@@ -1,14 +1,11 @@
 import { Bell, Heart } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
 
-interface NavbarProps {
-  currentView: "caregiver" | "family";
-  onViewSwitch: () => void;
-}
-
-const Navbar = ({ currentView, onViewSwitch }: NavbarProps) => {
+const Navbar = () => {
   const location = useLocation();
+  
+  // Auto-detect current view based on route
+  const currentView = location.pathname.startsWith("/family") ? "family" : "caregiver";
   
   const caregiverLinks = [
     { label: "Dashboard", path: "/caregiver/dashboard" },
@@ -59,14 +56,6 @@ const Navbar = ({ currentView, onViewSwitch }: NavbarProps) => {
               <Bell className="w-5 h-5 text-muted-foreground" />
               <span className="absolute top-1 right-1 w-2 h-2 bg-coral rounded-full"></span>
             </button>
-            
-            <Button
-              onClick={onViewSwitch}
-              variant="outline"
-              className="rounded-full px-5 hover:translate-y-[-2px] border-primary/20 hover:border-primary transition-all"
-            >
-              Switch to {currentView === "caregiver" ? "Family" : "Caregiver"} View
-            </Button>
           </div>
         </div>
       </div>
