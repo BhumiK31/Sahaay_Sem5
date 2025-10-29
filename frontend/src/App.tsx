@@ -1,149 +1,120 @@
-import { useState } from 'react';
-import { Button } from './components/ui/button';
-import { Badge } from './components/ui/badge';
-import { Users, UserCheck } from 'lucide-react';
-import { Logo } from './components/Logo';
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Index from "./pages/Index";
+import NotFound from "./pages/NotFound";
 
-// Job Seeker Dashboard Components
-import { DashboardHeader } from './components/DashboardHeader';
-import { JobSearch } from './components/JobSearch';
-import { QuickStats } from './components/QuickStats';
-import { RecentJobs } from './components/RecentJobs';
-import { ApplicationStatus } from './components/ApplicationStatus';
-import { MessageCenter } from './components/MessageCenter';
-import { ProfileSidebar } from './components/ProfileSidebar';
+// Authentication pages
+import Login from "./pages/auth/Login";
+import SignUp from "./pages/auth/SignUp";
+import EmailVerification from "./pages/auth/EmailVerification";
+import ProfileCompletion from "./pages/auth/ProfileCompletion";
 
-// Client Dashboard Components
-import { ClientDashboardHeader } from './components/client/ClientDashboardHeader';
-import { ClientStats } from './components/client/ClientStats';
-import { PostJob } from './components/client/PostJob';
-import { ManageJobs } from './components/client/ManageJobs';
-import { BrowseCaregivers } from './components/client/BrowseCaregivers';
-import { ReviewApplicants } from './components/client/ReviewApplicants';
-import { ClientMessageCenter } from './components/client/ClientMessageCenter';
-import { ClientProfileSidebar } from './components/client/ClientProfileSidebar';
-import { CaregiverAcceptanceProcedure } from './components/client/CaregiverAcceptanceProcedure';
+// Caregiver pages
+import CaregiverDashboard from "./pages/caregiver/Dashboard";
+import FindJobs from "./pages/caregiver/FindJobs";
+import MyApplications from "./pages/caregiver/MyApplications";
+import MessageFamily from "./pages/caregiver/MessageFamily";
+import JobDetails from "./pages/caregiver/JobDetails";
+import ApplyJob from "./pages/caregiver/ApplyJob";
 
-export default function App() {
-  const [userType, setUserType] = useState<'seeker' | 'client'>('seeker');
-  const [activeTab, setActiveTab] = useState('dashboard');
+// Family pages
+import FamilyDashboard from "./pages/family/FamilyDashboard";
+import FindCaregiver from "./pages/family/FindCaregiver";
+import ApplicationsAccepted from "./pages/family/ApplicationsAccepted";
+import CaregiverProfile from "./pages/family/CaregiverProfile";
+import PaymentMethod from "./pages/family/PaymentMethod";
+import BookingDetails from "./pages/family/BookingDetails";
+import ScheduleInterview from "./pages/family/ScheduleInterview";
 
-  // Logo configuration - Replace with your own logo URL
-  const logoConfig = {
-    // Add your logo URL here (SVG, PNG, or JPG)
-    // Example: logoUrl: '/path/to/your/logo.svg'
-    // Example: logoUrl: 'https://your-domain.com/logo.png'
-    logoUrl: undefined, // Set to your logo URL
-    alt: 'Sahaay Logo',
-    fallbackText: 'Sahaay'
-  };
+const queryClient = new QueryClient();
 
-  const toggleUserType = () => {
-    setUserType(userType === 'seeker' ? 'client' : 'seeker');
-    setActiveTab('dashboard');
-  };
-
-  if (userType === 'client') {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <div className="bg-white border-b border-gray-200 p-4">
-          <div className="max-w-full mx-auto flex justify-between items-center">
-            <div className="flex items-center space-x-4">
-              <Logo 
-                logoUrl={logoConfig.logoUrl}
-                alt={logoConfig.alt}
-                fallbackText={logoConfig.fallbackText}
-                size="md"
-              />
-              <Badge variant="outline" className="bg-purple-100 text-purple-700">
-                Family Dashboard
-              </Badge>
-            </div>
-            <Button onClick={toggleUserType} variant="outline">
-              <UserCheck className="w-4 h-4 mr-2" />
-              Switch to Caregiver View
-            </Button>
-          </div>
-        </div>
-
-        <ClientDashboardHeader activeTab={activeTab} setActiveTab={setActiveTab} />
-        
-        <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            {/* Main Content */}
-            <div className="lg:col-span-3 space-y-8">
-              {activeTab === 'dashboard' && (
-                <>
-                  <ClientStats />
-                  <ManageJobs />
-                  <ReviewApplicants />
-                </>
-              )}
-              {activeTab === 'post-job' && <PostJob />}
-              {activeTab === 'jobs' && <ManageJobs />}
-              {activeTab === 'caregivers' && <BrowseCaregivers />}
-              {activeTab === 'applicants' && <ReviewApplicants />}
-              {activeTab === 'procedure' && <CaregiverAcceptanceProcedure />}
-              {activeTab === 'messages' && <ClientMessageCenter />}
-            </div>
-            
-            {/* Sidebar */}
-            <div className="lg:col-span-1">
-              <ClientProfileSidebar />
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+// Protected Route Component
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return <Navigate to="/login" replace />;
   }
+  return <>{children}</>;
+};
 
+// Conditional Navbar Component
+const ConditionalNavbar = () => {
+  const location = useLocation();
+  const publicRoutes = [
+    "/",
+    "/login",
+    "/signup",
+    "/email-verification",
+    "/profile-completion",
+  ];
+  if (publicRoutes.includes(location.pathname)) {
+    return null;
+  }
+  return <Navbar />;
+};
+
+const App = () => {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-white border-b border-gray-200 p-4">
-        <div className="max-w-full mx-auto flex justify-between items-center">
-          <div className="flex items-center space-x-4">
-            <Logo 
-              logoUrl={logoConfig.logoUrl}
-              alt={logoConfig.alt}
-              fallbackText={logoConfig.fallbackText}
-              size="md"
-            />
-            <Badge variant="outline" className="bg-green-100 text-green-700">
-              Caregiver Dashboard
-            </Badge>
-          </div>
-          <Button onClick={toggleUserType} variant="outline">
-            <Users className="w-4 h-4 mr-2" />
-            Switch to Family View
-          </Button>
-        </div>
-      </div>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <ConditionalNavbar />
+          <Routes>
+            {/* Public Routes - No Navbar */}
+            <Route path="/" element={<Index />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/email-verification" element={<EmailVerification />} />
+            <Route path="/profile-completion" element={<ProfileCompletion />} />
 
-      <DashboardHeader activeTab={activeTab} setActiveTab={setActiveTab} />
-      
-      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-3 space-y-8">
-            {activeTab === 'dashboard' && (
-              <>
-                <QuickStats />
-                <JobSearch />
-                <RecentJobs />
-                <ApplicationStatus />
-              </>
-            )}
-            {activeTab === 'jobs' && <JobSearch />}
-            {activeTab === 'applications' && <ApplicationStatus />}
-            {activeTab === 'messages' && <MessageCenter />}
-          </div>
-          
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <ProfileSidebar />
-          </div>
-        </div>
-      </div>
-    </div>
+            {/* Protected Routes - With Navbar */}
+            {/* Caregiver */}
+            <Route path="/caregiver/dashboard" element={<ProtectedRoute><CaregiverDashboard /></ProtectedRoute>} />
+            <Route path="/caregiver/find-jobs" element={<ProtectedRoute><FindJobs /></ProtectedRoute>} />
+            <Route path="/caregiver/applications" element={<ProtectedRoute><MyApplications /></ProtectedRoute>} />
+            <Route path="/caregiver/booking/:bookingId" element={<ProtectedRoute><BookingDetails /></ProtectedRoute>} />
+            <Route path="/caregiver/job/:jobId" element={<ProtectedRoute><JobDetails /></ProtectedRoute>} />
+            <Route path="/caregiver/apply/:jobId" element={<ProtectedRoute><ApplyJob /></ProtectedRoute>} />
+            <Route path="/caregiver/message-family/:jobId" element={<ProtectedRoute><MessageFamily /></ProtectedRoute>} />
+
+            {/* Family */}
+            <Route path="/family/dashboard" element={<ProtectedRoute><FamilyDashboard /></ProtectedRoute>} />
+            <Route path="/family/find-caregiver" element={<ProtectedRoute><FindCaregiver /></ProtectedRoute>} />
+            <Route path="/family/applications" element={<ProtectedRoute><ApplicationsAccepted /></ProtectedRoute>} />
+            <Route path="/family/schedule-interview" element={<ProtectedRoute><ScheduleInterview /></ProtectedRoute>} />
+            {/* DYNAMIC SCHEDULE INTERVIEW ROUTE */}
+            <Route path="/family/schedule-interview/:bookingId" element={<ProtectedRoute><ScheduleInterview /></ProtectedRoute>} />
+
+            {/* Family-side booking and payment routes */}
+            <Route path="/family/booking/:id" element={
+              <ProtectedRoute>
+                <BookingDetails />
+              </ProtectedRoute>
+            } />
+            <Route path="/family/payment/:id" element={
+              <ProtectedRoute>
+                <PaymentMethod />
+              </ProtectedRoute>
+            } />
+            <Route path="/family/caregiver/profile/:id" element={
+              <ProtectedRoute>
+                <CaregiverProfile />
+              </ProtectedRoute>
+            } />
+
+            {/* 404 */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
   );
-}
+};
+
+export default App;

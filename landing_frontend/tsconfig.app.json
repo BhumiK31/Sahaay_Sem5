@@ -26,5 +26,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "../frontend/src/pages/caregiver", "../frontend/src/pages/family"]
 }
