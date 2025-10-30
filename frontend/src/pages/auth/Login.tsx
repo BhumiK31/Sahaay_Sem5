@@ -62,10 +62,11 @@ const Login = () => {
     <div className="min-h-screen bg-background flex items-center justify-center section-padding">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
-          <div className="flex items-center justify-center mb-4">
-            <img src={sahaayLogo} alt="SAHAAY" className="h-10 w-auto" />
-          </div>
-        </div>
+  <div className="flex items-center justify-center mb-4 mt-4"> {/* added mt-4 */}
+    <img src={sahaayLogo} alt="SAHAAY" className="h-10 w-auto" />
+  </div>
+</div>
+
         <Card className="shadow-[var(--shadow-hover)]">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl font-poppins">Welcome Back to Sahaay 💛</CardTitle>

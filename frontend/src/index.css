@@ -84,3 +84,8 @@ All colors MUST be HSL.
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 }
+
+/* 🩵 Prevent unwanted horizontal scrolling */
+html, body {
+  overflow-x: hidden;
+}

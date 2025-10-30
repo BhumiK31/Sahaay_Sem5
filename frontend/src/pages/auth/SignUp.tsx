@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Eye, EyeOff, Users, HelpingHand } from 'lucide-react';
+import sahaayLogo from '@/assets/sahaay-logo.png';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -84,10 +85,11 @@ const SignUp = () => {
     <div className="min-h-screen bg-background flex items-center justify-center section-padding">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
-          <div className="flex items-center justify-center mb-4">
-            <h2 className="text-xl font-bold">SAHAAY</h2>
-          </div>
-        </div>
+  <div className="flex items-center justify-center mb-4 mt-4">  {/* added mt-4 */}
+    <img src={sahaayLogo} alt="SAHAAY" className="h-10 w-auto" />
+  </div>
+</div>
+
         <Card className="shadow-[var(--shadow-hover)]">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl font-poppins">Join the Sahaay Community 🤝</CardTitle>

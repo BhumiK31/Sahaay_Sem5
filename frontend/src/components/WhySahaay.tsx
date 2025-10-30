@@ -1,93 +1,66 @@
 import { Clock, MapPin, GraduationCap, Globe } from 'lucide-react';
 
 const WhySahaay = () => {
-  const usps = [
-    {
-      icon: Clock,
-      title: 'Quick Matching',
-      description: 'Find help in minutes, not days. Our smart matching connects you with available helpers instantly.',
-      color: 'accent-coral'
-    },
-    {
-      icon: MapPin,
-      title: 'Local & Verified',
-      description: 'All helpers are background-checked locals in your community who understand your needs.',
-      color: 'primary'
-    },
-    {
-      icon: GraduationCap,
-      title: 'Student-Friendly',
-      description: 'Flexible opportunities perfect for students and young adults looking to earn while helping.',
-      color: 'accent-mint'
-    },
-    {
-      icon: Globe,
-      title: 'Multilingual Support',
-      description: 'Helpers who speak your language and understand your cultural preferences.',
-      color: 'highlight-yellow'
-    }
-  ];
-
-  const getColorClasses = (color: string) => {
-    switch (color) {
-      case 'accent-coral':
-        return 'bg-accent-coral/10 text-accent-coral';
-      case 'primary':
-        return 'bg-primary/10 text-primary';
-      case 'accent-mint':
-        return 'bg-accent-mint/10 text-accent-mint';
-      case 'highlight-yellow':
-        return 'bg-highlight-yellow/10 text-highlight-yellow';
-      default:
-        return 'bg-primary/10 text-primary';
-    }
-  };
-
   return (
-    <section className="section-padding bg-secondary/30">
-      <div className="container-width">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-poppins font-bold text-foreground mb-6">
+    <section
+      id="why-choose"
+      className="py-14 bg-gradient-to-br from-[#f9fafb] to-[#eef2f7] backdrop-blur-lg"
+    >
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Heading */}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
             Why Choose Sahaay?
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            We're more than just a platform - we're building a community of care and support.
+          <p className="text-base md:text-lg text-gray-700 max-w-2xl mx-auto">
+            We’re more than just a platform — we’re building a community of care and support.
           </p>
+          <div className="mt-4 w-20 h-[3px] bg-blue-500 mx-auto rounded-full"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {usps.map((usp, index) => (
-            <div 
-              key={index} 
-              className="why-sahaay-card text-center space-y-4 p-6 bg-card rounded-[var(--radius-lg)] border border-border/50 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-300 hover:scale-105 hover:border-primary/20 hover:bg-card/80"
+        {/* Cards in one line */}
+        <div className="flex justify-center items-stretch gap-6 overflow-x-auto lg:overflow-visible px-2">
+          {[
+            {
+              icon: <Clock className="w-7 h-7 text-blue-500" />,
+              title: 'Quick Matching',
+              desc: 'Find help in minutes — our smart system connects you instantly.',
+            },
+            {
+              icon: <MapPin className="w-7 h-7 text-blue-500" />,
+              title: 'Local & Verified',
+              desc: 'Background-checked helpers from your own community.',
+            },
+            {
+              icon: <GraduationCap className="w-7 h-7 text-blue-500" />,
+              title: 'Student-Friendly',
+              desc: 'Flexible, short-term opportunities ideal for students.',
+            },
+            {
+              icon: <Globe className="w-7 h-7 text-blue-500" />,
+              title: 'Multilingual Support',
+              desc: 'Find helpers who speak your language and understand your needs.',
+            },
+          ].map((card, index) => (
+            <div
+              key={index}
+              className="w-[240px] bg-white/60 backdrop-blur-md border border-white/40 
+                         p-6 rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.08)]
+                         hover:shadow-[0_4px_15px_rgba(59,130,246,0.3)]
+                         hover:scale-[1.04] hover:border-blue-300
+                         transition-all duration-300 ease-out text-center flex flex-col justify-between"
             >
-              <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full ${getColorClasses(usp.color)}`}>
-                <usp.icon className="w-8 h-8" />
+              <div>
+                <div className="flex justify-center mb-4">
+                  <div className="p-4 bg-blue-100/60 rounded-full shadow-inner">
+                    {card.icon}
+                  </div>
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">{card.title}</h3>
+                <p className="text-gray-700 text-sm leading-relaxed">{card.desc}</p>
               </div>
-              <h3 className="text-xl font-poppins font-semibold text-foreground">
-                {usp.title}
-              </h3>
-              <p className="text-muted-foreground">
-                {usp.description}
-              </p>
             </div>
           ))}
-        </div>
-
-        {/* Stats */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-          <div className="space-y-2">
-            <p className="text-3xl font-poppins font-bold text-primary">2,000+</p>
-            <p className="text-muted-foreground">Verified Helpers</p>
-          </div>
-          <div className="space-y-2">
-            <p className="text-3xl font-poppins font-bold text-accent-coral">10,000+</p>
-            <p className="text-muted-foreground">Hours Supported</p>
-          </div>
-          <div className="space-y-2">
-            <p className="text-3xl font-poppins font-bold text-accent-mint">50+</p>
-            <p className="text-muted-foreground">Cities Served</p>
-          </div>
         </div>
       </div>
     </section>
